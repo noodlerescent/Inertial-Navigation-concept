@@ -3,6 +3,7 @@
 
 #include "complementary.h"
 #include "parser.h"
+#include "matplotlibcpp.h"
 
 
 void DeducePath(std::vector<std::pair<long double, long double>>& path, std::vector<Sensor>& sensors) {
