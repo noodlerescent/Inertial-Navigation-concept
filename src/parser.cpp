@@ -21,16 +21,22 @@ InfoBlock Parse(std::ifstream& json_file) {
   InfoBlock block{};
   std::string line{};
   while (std::getline(json_file, line)) {
-    if (line.find("sensor") != std::string::npos) {
-    if (line.find("Gyroscope") != std::string::npos) {
-      block.device = "Gyroscope";
-    } else if (line.find("Magnetometer") != std::string::npos) {
-      block.device = "Magnetometer";
-    } else if (line.find("Pedometer") != std::string::npos) {
-      block.device = "Pedometer";
-    } else if (line.find("Location") != std::string::npos) {
-      block.device = "Location";
+    if (line.find("Uncalibrated") != std::string::npos) {
+      while(line.find("}") == std::string::npos) {
+        std::getline(json_file, line);
+      }
+      continue;
     }
+    if (line.find("sensor") != std::string::npos) {
+      if (line.find("Gyroscope") != std::string::npos) {
+        block.device = "Gyroscope";
+      } else if (line.find("Magnetometer") != std::string::npos) {
+        block.device = "Magnetometer";
+      } else if (line.find("Pedometer") != std::string::npos) {
+        block.device = "Pedometer";
+      } else if (line.find("Location") != std::string::npos) {
+        block.device = "Location";
+      }
     } else if (line.find("seconds_elapsed") != std::string::npos) {
       line = line.substr(line.find_first_of(integral));
       block.time = std::stold(line);
