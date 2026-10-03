@@ -63,7 +63,7 @@ void GetParsedData(std::vector<Sensor>& sensors) {
   std::string name{};
   Sensor Gyroscope(std::string("Gyroscope")), Pedometer(std::string("Pedometer")),
          Magnetometer(std::string("Magnetometer")), Location(std::string("Location"));
-  std::ifstream data("src/data1.json");
+  std::ifstream data("data1.json");
   while (data.peek() != EOF) {
     InfoBlock block = Parse(data);
     if (block.device == std::string("Gyroscope")) {
