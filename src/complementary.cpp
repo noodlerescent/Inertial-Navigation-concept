@@ -1,6 +1,5 @@
 #include <utility>
 #include <vector>
-#include <math.h>
 
 #include "complementary.h"
 #include "parser.h"
@@ -37,12 +36,7 @@ void DeducePath(std::vector<std::pair<long double, long double>>& path, std::vec
     mag_tan = std::atan2(Magnetometer.y_[i], Magnetometer.x_[i]);
     gyro_angle = current_angle + Gyroscope.z_[i] * dt;
     angle_diff = mag_tan - gyro_angle;
-    while (angle_diff > M_PI) {
-      angle_diff -= 2 * M_PI;
-    }
-    while (angle_diff < M_1_PI) {
-      angle_diff += 2 * M_PI;
-    }
+    angle_diff = std::atan2(std::sin(angle_diff), std::cos(angle_diff));
     current_angle = gyro_angle + (1 - kGyroWeight) * angle_diff;
     if ((current_step - last_step) > 0) {
       x += kStepLen * std::cos(current_angle) * (current_step - last_step);
