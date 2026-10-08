@@ -20,6 +20,7 @@ int main() {
   matplotlibcpp::title("Inertial map");
   matplotlibcpp::xlabel("X axis");
   matplotlibcpp::ylabel("Y axis");
+  matplotlibcpp::axis("equal");
   matplotlibcpp::show();
   return 0;
 }
